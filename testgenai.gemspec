@@ -10,12 +10,12 @@ Gem::Specification.new do |spec|
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.1.0"
 
-  spec.files = Dir["lib/**/*.rb", "exe/**/*", "*.md", "*.gemspec", "Gemfile"]
+  spec.files = Dir["lib/**/*.rb", "exe/**/*", "*.md", "*.gemspec", "Gemfile"].reject { |f| f.match?(/\A(CLAUDE|AGENTS)\.md\z/) }
   spec.bindir = "exe"
   spec.executables = ["testgenai"]
   spec.require_paths = ["lib"]
 
   spec.add_dependency "thor", "~> 1.3"
-  spec.add_dependency "ruby_llm", "~> 1.3"
+  spec.add_dependency "ruby_llm", "~> 1.14"
   spec.add_dependency "parser", "~> 3.3"
 end
