@@ -1,5 +1,4 @@
 require "json"
-require "parser/current"
 
 module Testgenai
   module Scanner
@@ -11,6 +10,11 @@ module Testgenai
       end
 
       def scan
+        resultset_path = File.join(@root, RESULTSET_PATH)
+        unless File.exist?(resultset_path)
+          warn "Warning: #{RESULTSET_PATH} not found"
+          return []
+        end
         coverage = merged_coverage
         coverage.flat_map do |file, lines|
           next [] if test_file?(file)
@@ -61,34 +65,6 @@ module Testgenai
         method_lines = coverage_lines[(start_line - 1)..(end_line - 1)] || []
         executable = method_lines.compact
         executable.any? && executable.all?(&:zero?)
-      end
-
-      def collect_methods(node, file, class_name:)
-        return [] unless node.is_a?(Parser::AST::Node)
-        case node.type
-        when :class, :module
-          current = [class_name, const_name(node.children[0])].compact.join("::")
-          node.children.flat_map { |c| collect_methods(c, file, class_name: current) }
-        when :def
-          [{file: file, class: class_name, method: node.children[0].to_s,
-            start_line: node.loc.line, end_line: node.loc.end.line}]
-        when :defs
-          [{file: file, class: class_name, method: "self.#{node.children[1]}",
-            start_line: node.loc.line, end_line: node.loc.end.line}]
-        else
-          node.children.flat_map { |c| collect_methods(c, file, class_name: class_name) }
-        end
-      end
-
-      def const_name(node)
-        return nil unless node.is_a?(Parser::AST::Node) && node.type == :const
-        parts = []
-        current = node
-        while current.is_a?(Parser::AST::Node) && current.type == :const
-          parts.unshift(current.children[1].to_s)
-          current = current.children[0]
-        end
-        parts.join("::")
       end
     end
   end
