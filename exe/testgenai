@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require "testgenai"
+
+Testgenai::CLI.start(ARGV)
