@@ -98,5 +98,10 @@ RSpec.describe Testgenai::Configuration do
       config = described_class.new(framework: "minitest")
       expect(config.validator_class).to eq(Testgenai::Validator::MinitestValidator)
     end
+
+    it "raises ConfigurationError for unknown framework" do
+      config = described_class.new(framework: "jest")
+      expect { config.validator_class }.to raise_error(Testgenai::ConfigurationError, /unknown framework/i)
+    end
   end
 end
