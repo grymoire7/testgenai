@@ -76,5 +76,11 @@ RSpec.describe Testgenai::Generator::RspecGenerator do
       result = gen.output_path_for(method_info)
       expect(result).to start_with("/custom/out/")
     end
+
+    it "maps app/models/user.rb to spec/models/user_spec.rb" do
+      info = method_info.merge(file: "/app/app/models/user.rb")
+      allow(Dir).to receive(:pwd).and_return("/app")
+      expect(generator.output_path_for(info)).to eq("/app/spec/models/user_spec.rb")
+    end
   end
 end
