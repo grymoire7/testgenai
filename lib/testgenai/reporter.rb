@@ -14,11 +14,11 @@ module Testgenai
     def context_result(method_info, context)
       puts "=== Context for #{method_info[:class]}##{method_info[:method]} ==="
       puts "  File: #{method_info[:file]}"
-      unless context[:dependencies].empty?
+      unless context[:dependencies].to_a.empty?
         puts "  Dependencies:"
         context[:dependencies].each { |d| puts "    #{d}" }
       end
-      unless context[:example_usage].empty?
+      unless context[:example_usage].to_a.empty?
         puts "  Example usages found: #{context[:example_usage].size}"
       end
       puts "  Related tests: #{context[:related_tests] ? "yes" : "none"}"
