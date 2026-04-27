@@ -1,0 +1,31 @@
+/.bundle/
+/coverage/
+/pkg/
+/spec/reports/
+/tmp/
+
+# rspec failure tracking
+.rspec_status
+.env
+*.gem
+
+.DS_Store
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+*.tsbuildinfo
+
+# Ignore local Claude AI settings
+/.claude/settings.local.json
+
+# Git worktrees
+.worktrees/
+
