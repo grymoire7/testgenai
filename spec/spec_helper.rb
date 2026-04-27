@@ -1,4 +1,6 @@
 require "bundler/setup"
+require "tmpdir"
+require "fileutils"
 require "testgenai"
 
 RSpec.configure do |config|
