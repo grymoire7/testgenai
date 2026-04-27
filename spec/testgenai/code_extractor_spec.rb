@@ -15,6 +15,11 @@ RSpec.describe Testgenai::CodeExtractor do
       expect(described_class.extract(response)).to eq("RSpec.describe Widget do\nend")
     end
 
+    it "extracts content from a non-ruby language fence" do
+      response = "```python\nsome_code = 1\n```"
+      expect(described_class.extract(response)).to eq("some_code = 1\n")
+    end
+
     it "prefers ruby fence over generic fence" do
       response = "```ruby\npreferred\n```\n```\nfallback\n```"
       expect(described_class.extract(response)).to eq("preferred\n")
