@@ -1,3 +1,5 @@
+require "shellwords"
+
 module Testgenai
   module Validator
     class RspecValidator < Base
@@ -10,7 +12,7 @@ module Testgenai
       private
 
       def run_rspec(path)
-        output = `bundle exec rspec #{path} --format documentation 2>&1`
+        output = `bundle exec rspec #{Shellwords.escape(path)} --format documentation 2>&1`
         [output, $?.exitstatus]
       end
 
