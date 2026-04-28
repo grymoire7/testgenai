@@ -10,8 +10,8 @@ Gem::Specification.new do |spec|
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.1.0"
 
-  spec.files = Dir["lib/**/*.rb", "exe/**/*", "*.md", "*.gemspec", "Gemfile"].reject { |f| f.match?(/\A(CLAUDE|AGENTS)\.md\z/) }
-  spec.bindir = "exe"
+  spec.files = Dir["lib/**/*.rb", "bin/**/*", "*.md", "*.gemspec", "Gemfile"].reject { |f| f.match?(/\A(CLAUDE|AGENTS)\.md\z/) }
+  spec.bindir = "bin"
   spec.executables = ["testgenai"]
   spec.require_paths = ["lib"]
 
