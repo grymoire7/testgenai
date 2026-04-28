@@ -1,5 +1,10 @@
 # TestGenAI
 
+✨ A CLI gem that adds tests for untested methods in your code ✨
+
+![Ruby Version](https://img.shields.io/badge/Ruby-3.4.5-green?logo=Ruby&logoColor=red&label=Ruby%20version&color=green)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/grymoire7/testgenai/blob/main/LICENSE)
+
 TestGenAI is a Ruby CLI gem for development environments that finds untested
 methods in your codebase and generates tests for them using an AI service.
 
