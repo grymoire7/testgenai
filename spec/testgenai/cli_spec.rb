@@ -68,6 +68,13 @@ RSpec.describe Testgenai::CLI do
         expect(scanner).to be_a(Testgenai::Scanner::SimplecovScanner)
       end
     end
+
+    context "when run in the testgenai repo itself" do
+      it "finds simplecov in the project Gemfile" do
+        cli_instance = described_class.new
+        expect(cli_instance.send(:simplecov_in_gemfile?)).to be true
+      end
+    end
   end
 
   describe "scan command" do

@@ -6,4 +6,5 @@ group :development, :test do
   gem "rspec", "~> 3.13"
   gem "standard", "~> 1.40"
   gem "minitest"
+  gem "simplecov", require: false
 end
