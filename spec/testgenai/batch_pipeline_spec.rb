@@ -83,7 +83,11 @@ RSpec.describe Testgenai::BatchPipeline do
       end
 
       it "calls reporter.fatal_error before aborting" do
-        batch.run([method_info]) rescue nil
+        begin
+          batch.run([method_info])
+        rescue
+          nil
+        end
         expect(reporter).to have_received(:fatal_error)
       end
     end

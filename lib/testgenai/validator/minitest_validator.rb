@@ -35,17 +35,17 @@ module Testgenai
 
       def extract_load_errors(output)
         output.lines
-              .select { |l| l.match?(/LoadError|SyntaxError|cannot load/) }
-              .map(&:strip)
-              .first(3)
+          .select { |l| l.match?(/LoadError|SyntaxError|cannot load/) }
+          .map(&:strip)
+          .first(3)
       end
 
       def extract_failures(output)
         output.lines
-              .select { |l| l.match?(/Failure:|Error:|\d+\) /) }
-              .map(&:strip)
-              .reject(&:empty?)
-              .first(5)
+          .select { |l| l.match?(/Failure:|Error:|\d+\) /) }
+          .map(&:strip)
+          .reject(&:empty?)
+          .first(5)
       end
     end
   end

@@ -44,7 +44,7 @@ module Testgenai
 
       def custom_output_path(method_info, suffix)
         class_part = method_info[:class]&.downcase&.gsub("::", "/") || "unknown"
-        method_part = method_info[:method].to_s.gsub(/\Aself\./, "").gsub(".", "_")
+        method_part = method_info[:method].to_s.gsub(/\Aself\./, "").tr(".", "_")
         File.join(@config.output_dir, "#{class_part}_#{method_part}#{suffix}")
       end
     end

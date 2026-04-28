@@ -36,8 +36,8 @@ module Testgenai
       def extract_load_errors(output)
         lines = output.lines
         lines.select { |l| l.match?(/LoadError|SyntaxError|NameError|cannot load/) }
-             .map(&:strip)
-             .first(3)
+          .map(&:strip)
+          .first(3)
       end
 
       def extract_failures(output)

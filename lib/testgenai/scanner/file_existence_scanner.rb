@@ -38,7 +38,6 @@ module Testgenai
         warn "Warning: could not parse #{file}: #{e.message}"
         []
       end
-
     end
   end
 end
