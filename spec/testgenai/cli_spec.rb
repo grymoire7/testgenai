@@ -50,6 +50,24 @@ RSpec.describe Testgenai::CLI do
         expect(scanner).to be_a(Testgenai::Scanner::FileExistenceScanner)
       end
     end
+
+    context "when simplecov is in Gemfile and coverage run succeeds" do
+      before do
+        File.write(File.join(root, "Gemfile"), "gem 'simplecov'")
+        allow(Dir).to receive(:pwd).and_return(root)
+        allow(cli).to receive(:system) do
+          cov = File.join(root, "coverage")
+          FileUtils.mkdir_p(cov)
+          File.write(File.join(cov, ".resultset.json"), '{"RSpec":{"coverage":{}}}')
+          true
+        end
+      end
+
+      it "returns a SimplecovScanner" do
+        scanner = cli.send(:build_scanner, config)
+        expect(scanner).to be_a(Testgenai::Scanner::SimplecovScanner)
+      end
+    end
   end
 
   describe "scan command" do
