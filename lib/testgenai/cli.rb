@@ -97,7 +97,7 @@ module Testgenai
       end
 
       warn "Running test suite to generate coverage data..."
-      cmd = config.framework == "minitest" ? "bundle exec ruby -Itest test/**/*_test.rb" : "bundle exec rspec"
+      cmd = (config.framework == "minitest") ? "bundle exec ruby -Itest test/**/*_test.rb" : "bundle exec rspec"
       system({"COVERAGE" => "true"}, cmd, out: File::NULL, err: File::NULL)
 
       if File.exist?(resultset)

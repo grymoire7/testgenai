@@ -4,7 +4,7 @@ RSpec.describe Testgenai::CLI do
 
   describe "version flag" do
     it "outputs the version" do
-      expect { described_class.start(["--version"]) }.to output(/#{Testgenai::VERSION}/).to_stdout
+      expect { described_class.start(["--version"]) }.to output(/#{Testgenai::VERSION}/o).to_stdout
     end
   end
 
