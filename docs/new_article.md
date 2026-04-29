@@ -1,4 +1,4 @@
-# A coding guide to build an AI-assisted test generation pipeline using Ruby agents
+# Creating a gem that writes your missing tests
 
 Most Ruby codebases have that one corner where tests fear to tread. Maybe it's
 the service object that seemed too simple to test when you wrote it. Maybe it's
@@ -553,7 +553,7 @@ generates the basic structure and happy path tests. You add the domain-specific
 edge cases yourself.
 
 Generated tests that fail after three retries get collected in the failed
-bucket. Those are the ones worth looking at manually. They're usually the
+bucket. Those are worth looking at manually. They're usually the
 methods where the code is too entangled to test in isolation, or where the
 behavior depends on database state that's hard to set up correctly.
 
@@ -582,3 +582,4 @@ part of translating those decisions into RSpec syntax, setting up test data,
 and writing the same `describe` and `context` blocks over and over.
 
 You make the decisions. The pipeline does the typing.
+

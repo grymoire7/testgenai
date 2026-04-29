@@ -8,6 +8,13 @@
 TestGenAI is a Ruby CLI gem for development environments that finds untested
 methods in your codebase and generates tests for them using an AI service.
 
+[!CAUTION]
+TestGenAI is a work in progress and should not be used in production
+environments. While is it works locally for me, it has not been tested in a
+wide variety of projects yet and may have many edge cases or bugs. Use with
+caution and please report any issues you encounter.
+
+
 See `docs/article.md` for the concepts this is based on. The article code is
 illustrative only and has never been run; this repository is the working
 implementation.
