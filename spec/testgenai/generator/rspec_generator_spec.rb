@@ -57,6 +57,29 @@ RSpec.describe Testgenai::Generator::RspecGenerator do
     end
   end
 
+  describe "when provider or model is unconfigured" do
+    it "raises ConfigurationError when both provider and model are missing" do
+      config = Testgenai::Configuration.new(framework: "rspec")
+      generator = described_class.new(config)
+      expect { generator.generate(method_info, context) }
+        .to raise_error(Testgenai::ConfigurationError, /provider.*model|model.*provider/i)
+    end
+
+    it "raises ConfigurationError when provider is missing but model is set" do
+      config = Testgenai::Configuration.new(framework: "rspec", model: "claude-opus-4-7")
+      generator = described_class.new(config)
+      expect { generator.generate(method_info, context) }
+        .to raise_error(Testgenai::ConfigurationError, /provider/i)
+    end
+
+    it "raises ConfigurationError when model is missing but provider is set" do
+      config = Testgenai::Configuration.new(framework: "rspec", provider: "anthropic")
+      generator = described_class.new(config)
+      expect { generator.generate(method_info, context) }
+        .to raise_error(Testgenai::ConfigurationError, /model/i)
+    end
+  end
+
   describe "#output_path_for" do
     it "maps lib/widget.rb to spec/widget_spec.rb" do
       info = method_info.merge(file: "/app/lib/widget.rb")

@@ -21,21 +21,28 @@ module Testgenai
       private
 
       def configure_llm
-        return unless @config.api_key
-        provider = @config.provider || "anthropic"
+        return unless @config.api_key && @config.provider
         RubyLLM.configure do |c|
-          c.public_send(:"#{provider}_api_key=", @config.api_key)
+          c.public_send(:"#{@config.provider}_api_key=", @config.api_key)
         end
       end
 
       def call_llm(prompt)
-        model = @config.model || default_model
-        chat = RubyLLM.chat(model: model)
+        if @config.provider.nil? && @config.model.nil?
+          raise ConfigurationError,
+            "provider and model must be configured. " \
+            "Set TESTGENAI_PROVIDER and TESTGENAI_MODEL, or use --provider and --model flags."
+        end
+        if @config.provider.nil?
+          raise ConfigurationError,
+            "provider must be configured. Set TESTGENAI_PROVIDER or use --provider flag."
+        end
+        if @config.model.nil?
+          raise ConfigurationError,
+            "model must be configured. Set TESTGENAI_MODEL or use --model flag."
+        end
+        chat = RubyLLM.chat(model: @config.model)
         chat.ask(prompt).content
-      end
-
-      def default_model
-        "claude-sonnet-4-6"
       end
 
       def build_prompt(method_info, context, feedback: nil)
